@@ -64,7 +64,7 @@ defaults =
     hel_geocoder_poi_url: hel_geocoder_base_url + "poi/"
     waag_url: "http://api.citysdk.waag.org/"
     google_url: "http://dev.hel.fi/geocoder/google/"
-    nominatim_url: "http://open.mapquestapi.com/nominatim/v1/search.php"
+    nominatim_url: "http://nominatim.openstreetmap.org/search.php?"
     bag42_url: "http://bag42.nl/api/v0/geocode/json"
     hel_servicemap_service_url: hel_servicemap_base_url + "service/"
     hel_servicemap_unit_url: hel_servicemap_base_url + "unit/"
@@ -247,6 +247,34 @@ nl =
         ]
     autocompletion_providers: ["poi_categories", "osm", "bag42", "google"]
 
+fr =
+    name: "France"
+    country: "fr"
+    cities: null
+    google_autocomplete_append: "France"
+    google_suffix: ", France"
+    bbox_ne: [52.3893, 9.1276]
+    bbox_sw: [41.395, -4.4815]
+    center: [48.8588589, 2.3475569]
+    min_zoom: 8
+    otp_base_url: "http://paris.acolytesanonymes.org/otp/routers/paris/"
+    poi_muni_id: null
+    waag_id: "admr.fr.france"
+    poi_providers:
+        "waag": [
+            {type: "library"}
+            {type: "park"}
+            {type: "swimming_pool"}
+            {type: "restaurant"}
+            {type: "cafe"}
+            {type: "bar"}
+            {type: "pub"}
+            {type: "supermarket"}
+            {type: "toilet"}
+            {type: "recycling"}
+        ]
+    autocompletion_providers: ["poi_categories", "osm", "google"]
+
 
 # Save and set configuration.
 #############################
@@ -257,9 +285,10 @@ citynavi.update_configs {
     manchester
     tampere
     nl
+    fr
 }
 
-citynavi.set_config("manchester")
+citynavi.set_config("fr")
 
 
 # Attempt to load local configuration.
