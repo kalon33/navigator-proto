@@ -135,10 +135,7 @@ $('#map-page').bind 'pageshow', (e, data) ->
         map.setView(position_point, zoom)
 
 
-$('#map-page').on 'pagebeforehide', (e, o) ->
-    if o.nextPage.attr('id') is "front-page"
-        reset_map()
-        window.ntf_srv_stopNtfService()
+$('#map-page [data-rel="back"]').on 'click', (e) -> reset_map()
 
 reset_map = () ->
         if routeLayer?
@@ -183,12 +180,12 @@ $('#live-page').bind 'pageshow', (e, data) ->
         console.log "Got #{data.Siri.ServiceDelivery.VehicleMonitoringDelivery[0].VehicleActivity.length} vehicles in #{citynavi.config.name}"
         sub = citynavi.realtime?.client.subscribe "/location/#{citynavi.config.id}/**", (msg) ->
             handle_vehicle_update false, msg
-        $('#live-page').on 'pagebeforehide', (e, o) ->
-            if o.nextPage.attr('id') is "front-page" then sub.cancel()
+        $('#live-page [data-rel="back"]').on 'click', (e) ->
+            sub.cancel()
 
 
-$('#live-page').on 'pagebeforehide', (e, o) ->
-    if o.nextPage.attr('id') is "front-page" then reset_map()
+$('#live-page [data-rel="back"]').on 'click', (e) ->
+    reset_map()
 
 ## Utilities
 
@@ -1223,8 +1220,7 @@ currentStep = null
 currentStepIndex = null
 speak_queue = []
 
-$('#navigation-page').on 'pagebeforehide', (e, o) ->
-    if o.nextPage.attr('id') is "map-page"
+$('#navigation-page [data-rel="back"]').on 'click', (e) ->
     if simulation_timeoutId?
         clearTimeout simulation_timeoutId
         simulation_timeoutId = null
