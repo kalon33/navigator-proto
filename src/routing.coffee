@@ -1224,7 +1224,7 @@ currentStepIndex = null
 speak_queue = []
 
 $('#navigation-page').on 'pagebeforehide', (e, o) ->
-    if o.nextPage.attr('id') is "map-page"
+    if o.nextPage.attr('id') is "map-page" then
     if simulation_timeoutId?
         clearTimeout simulation_timeoutId
         simulation_timeoutId = null
